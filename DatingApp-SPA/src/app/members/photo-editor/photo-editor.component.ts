@@ -6,7 +6,6 @@ import { AuthService } from 'src/app/_services/auth.service';
 import { UserService } from 'src/app/_services/user.service';
 import { environment } from 'src/environments/environment';
 
-
 @Component({
   selector: 'app-photo-editor',
   templateUrl: './photo-editor.component.html',
@@ -65,17 +64,18 @@ export class PhotoEditorComponent implements OnInit {
     this.uploader.onSuccessItem = (item, response, status, headers) => {
       if (response) {
         const res: Photo = JSON.parse(response);
-        const photo = {
+        const photos = {
           id: res.id,
           url: res.url,
           dateAdded: res.dateAdded,
           description: res.description,
           isMain: res.isMain,
+          isApproved: res.isApproved,
         };
-        this.photos.push(photo);
-        if (photo.isMain) {
-          this.authService.changeMemberPhoto(photo.url);
-          this.authService.currentUser.photoUrl = photo.url;
+        this.photos.push(photos);
+        if (photos.isMain) {
+          this.authService.changeMemberPhoto(photos.url);
+          this.authService.currentUser.photoUrl = photos.url;
           localStorage.setItem(
             'user',
             JSON.stringify(this.authService.currentUser)
