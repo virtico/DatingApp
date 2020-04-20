@@ -23,17 +23,21 @@ export class AdminService {
     );
   }
   getPhotosForApproval() {
+
     return this.http.get(this.baseUrl + 'admin/photosForModeration');
+
   }
 
   approvePhoto(photoId) {
     return this.http.post(
-      this.baseUrl + 'admin/approvePhoto/' + PathLocationStrategy,
+      this.baseUrl + 'admin/approvePhoto/' + photoId,
       {}
     );
+
   }
 
   rejectPhoto(photoId) {
     return this.http.post(this.baseUrl + 'admin/rejectPhoto/' + photoId, {});
+
   }
 }

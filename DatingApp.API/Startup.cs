@@ -165,13 +165,14 @@ namespace DatingApp.API
             app.UseAuthorization();
 
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
-
+            // used after building angular in wwwroot
             app.UseDefaultFiles();
             app.UseStaticFiles();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                // Fallback not used for development when in angular
                 endpoints.MapFallbackToController("index","Fallback");
             });
         }

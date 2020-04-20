@@ -91,7 +91,7 @@ namespace DatingApp.API.Controllers
         }
 
         [Authorize(Policy = "ModeratePhotoRole")]
-        [HttpGet("photoesForModeration")]
+        [HttpGet("photosForModeration")]
         public async Task<IActionResult> GetPhotosForModeration()
         {
             var photos = await _context.Photos
@@ -100,7 +100,7 @@ namespace DatingApp.API.Controllers
             .Where(p => p.IsApproved == false)
             .Select(u => new
             {
-                IdentityBuilder = u.Id,
+                id = u.Id,
                 Username = u.User.UserName,
                 Url = u.Url,
                 isApproved = u.IsApproved
